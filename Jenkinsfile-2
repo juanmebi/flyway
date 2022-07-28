@@ -17,7 +17,7 @@ pipeline {
     }
     stage('Validate - DB Migration') {
               steps {
-                  sh '$FLYWAY_PATH/flyway -user=$FLYWAY_USER -password=$FLYWAY_PASSWORD -url=$FLYWAY_URL -locations=$FLYWAY_PATH/sql validate'
+                  sh '$FLYWAY_PATH/flyway -user=$FLYWAY_USER -password=$FLYWAY_PASSWORD -url=$FLYWAY_URL validate'
               }
     }
     stage('Info') {
