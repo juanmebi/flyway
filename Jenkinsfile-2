@@ -4,25 +4,25 @@ pipeline {
     DB_PROTEOMES=credentials('db-proteomes')
   }
   stages {
-    stage('Verify version') {
-      steps {
-        sh 'docker run --rm flyway/flyway:8.5.1 version'
-      }
-    }
-    stage('migrate') {
-      steps {
-        sh 'docker run --rm -v $WORKSPACE/sql:/flyway/sql -v $WORKSPACE/conf:/flyway/conf flyway/flyway:8.5.1 -user=$DB_PROTEOMES -password=$DB_PROTEOMES migrate'
-      }
-    }
-    stage('validate') {
-      steps {
-        sh 'docker run --rm -v $WORKSPACE/sql:/flyway/sql -v $WORKSPACE/conf:/flyway/conf flyway/flyway:8.5.1 -user=$DB_PROTEOMES -password=$DB_CREDS_PSW validate'
-      }
-    }
-    stage('info') {
-      steps {
-        sh 'docker run --rm -v $WORKSPACE/sql:/flyway/sql -v $WORKSPACE/conf:/flyway/conf flyway/flyway:8.5.1 -user=$DB_PROTEOMES -password=$DB_PROTEOMES info'
-      }
+    stage('Build - DB Migration') {
+              environment {
+                  FLYWAY_LOCATIONS='filesystem:/${WORKSPACE}/sql'
+                  FLYWAY_URL='jdbc:postgresql://localhost:5432/postgres'
+                  FLYWAY_USER='postgres'
+                  FLYWAY_PASSWORD='test'
+                  FLYWAY_SCHEMAS='public'
+                  FLYWAY_PATH='/usr/local/bin'
+              }
+              steps {
+                  echo 'Run Flyway Migration'
+                  echo "${WORKSPACE}"
+                  sh 'whereis flyway'
+                  sh 'flyway info'
+                  sh 'ls -ltr /usr/bin'
+                  //unstash 'db'
+                  //flywayrunner installationName: 'flywaytool', flywayCommand: 'migrate', credentialsId: $FLYWAY_USER/$FLYWAY_PASSWORD, url: $FLYWAY_URL', locations: $FLYWAY_LOCATIONS
+                  sh '$FLYWAY_PATH/flyway-9.0.1 -user=$FLYWAY_USER -password=$FLYWAY_PASSWORD -url=$FLYWAY_URL -locations=$FLYWAY_LOCATIONS info'
+              }
     }
   }
 }
