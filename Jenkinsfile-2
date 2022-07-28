@@ -17,13 +17,13 @@ pipeline {
                   echo 'Flyway path'
                   echo "$FLYWAY_PATH"
                   echo 'Password-------'
-                  echo "$DB_PROTEOMES_PSW"
+                  echo "$DB_PROTEOMES_USR"
                   
                   echo 'Locations Path'
                   echo "$FLYWAY_LOCATIONS"
                  
                   sh 'flyway info'
-                  sh '$FLYWAY_PATH/flyway -user=$FLYWAY_USER -password=$FLYWAY_PASSWORD -url=$FLYWAY_URL -locations=$FLYWAY_LOCATIONS info'
+                  sh '$FLYWAY_PATH/flyway -user=$FLYWAY_USER -password=$FLYWAY_PASSWORD -url=$FLYWAY_URL -locations=$FLYWAY_PATH/sql info'
               }
     }
   }
