@@ -16,7 +16,7 @@ pipeline {
               steps {
                   sh 'Flyway path'
                   echo "${FLYWAY_PATH}"
-                  sh 'Password-------'
+                  echo 'Password-------'
                   echo "${DB_PROTEOMES_PSW}"
                   
                   echo 'Locations Path'
