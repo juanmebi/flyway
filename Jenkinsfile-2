@@ -2,7 +2,7 @@ pipeline {
   agent any 
   environment {
     DB_PROTEOMES=credentials('db-proteomes')
-    FLYWAY_LOCATIONS='/Volumes/Macintosh\ HD\ 4/DEV/Repos/liquibase/changes'
+    FLYWAY_LOCATIONS='filesystem:/usr/local/bin/flyway-9.0.1/sql'
     FLYWAY_URL='jdbc:postgresql://localhost:5432/postgres'
     FLYWAY_USER='postgres'
     FLYWAY_PASSWORD='test'
@@ -10,19 +10,19 @@ pipeline {
     FLYWAY_PATH='/usr/local/bin/flyway-9.0.1'
   }
   stages {
-    stage('Build - DB Migration') {
+    stage('Build - DB Changes') {
               steps {
-                  sh '$FLYWAY_PATH/flyway -user=$FLYWAY_USER -password=$FLYWAY_PASSWORD -url=$FLYWAY_URL -locations=$FLYWAY_PATH/sql migrate'
+                  sh '$FLYWAY_PATH/flyway -user=$FLYWAY_USER -password=$FLYWAY_PASSWORD -url=$FLYWAY_URL  -locations=$FLYWAY_LOCATIONS migrate'
               }
     }
-    stage('Validate - DB Migration') {
+    stage('Validate - Changes') {
               steps {
-                  sh '$FLYWAY_PATH/flyway -user=$FLYWAY_USER -password=$FLYWAY_PASSWORD -url=$FLYWAY_URL -locations=$FLYWAY_PATH/sql validate'
+                  sh '$FLYWAY_PATH/flyway -user=$FLYWAY_USER -password=$FLYWAY_PASSWORD -url=$FLYWAY_URL  -locations=$FLYWAY_LOCATIONS validate'
               }
     }
-    stage('Info') {
+    stage('Show Info') {
               steps {
-                  sh '$FLYWAY_PATH/flyway -user=$FLYWAY_USER -password=$FLYWAY_PASSWORD -url=$FLYWAY_URL -locations=$FLYWAY_PATH/sql info'
+                  sh '$FLYWAY_PATH/flyway -user=$FLYWAY_USER -password=$FLYWAY_PASSWORD -url=$FLYWAY_URL  -locations=$FLYWAY_LOCATIONS info'
               }
     }
   }
