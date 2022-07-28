@@ -15,12 +15,12 @@ pipeline {
               }
               steps {
                   sh 'Flyway path'
-                  echo "${FLYWAY_PATH}"
+                  echo "$FLYWAY_PATH"
                   echo 'Password-------'
-                  echo "${DB_PROTEOMES_PSW}"
+                  echo "$DB_PROTEOMES_PSW"
                   
                   echo 'Locations Path'
-                  echo "${FLYWAY_LOCATIONS}"
+                  echo "$FLYWAY_LOCATIONS"
                  
                   sh 'flyway info'
                   sh '$FLYWAY_PATH/flyway -user=$FLYWAY_USER -password=$FLYWAY_PASSWORD -url=$FLYWAY_URL -locations=$FLYWAY_LOCATIONS info'
