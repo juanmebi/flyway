@@ -4,9 +4,6 @@ pipeline {
     DB_PROTEOMES=credentials('db-proteomes')
     FLYWAY_LOCATIONS='filesystem:/usr/local/bin/flyway-9.0.1/sql'
     FLYWAY_URL='jdbc:postgresql://localhost:5432/postgres'
-    FLYWAY_USER='postgres'
-    FLYWAY_PASSWORD='test'
-    FLYWAY_SCHEMAS='public'
     FLYWAY_PATH='/usr/local/bin/flyway-9.0.1'
   }
   stages {
@@ -17,12 +14,12 @@ pipeline {
     }
     stage('Validate - Changes') {
               steps {
-                  sh '$FLYWAY_PATH/flyway -user=$FLYWAY_USER -password=$FLYWAY_PASSWORD -url=$FLYWAY_URL  -locations=$FLYWAY_LOCATIONS validate'
+                  sh '$FLYWAY_PATH/flyway -user=$DB_PROTEOMES_USR -password=$DB_PROTEOMES_PSW -url=$FLYWAY_URL  -locations=$FLYWAY_LOCATIONS validate'
               }
     }
     stage('Show Info') {
               steps {
-                  sh '$FLYWAY_PATH/flyway -user=$FLYWAY_USER -password=$FLYWAY_PASSWORD -url=$FLYWAY_URL  -locations=$FLYWAY_LOCATIONS info'
+                  sh '$FLYWAY_PATH/flyway -user=$DB_PROTEOMES_USR -password=$DB_PROTEOMES_PSW -url=$FLYWAY_URL  -locations=$FLYWAY_LOCATIONS info'
               }
     }
   }
