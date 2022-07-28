@@ -10,20 +10,20 @@ pipeline {
     FLYWAY_PATH='/usr/local/bin/flyway-9.0.1'
   }
   stages {
-    stage('Build - DB Migration') {
+    stage('Build - DB Changes') {
               steps {
-                  echo "Este es el work mijo $WORKSPACE"
-                  sh '$FLYWAY_PATH/flyway -user=$FLYWAY_USER -password=$FLYWAY_PASSWORD -url=$FLYWAY_URL  -locations=$FLYWAY_PATH/sql migrate'
+                  sh 'cd $FLYWAY_PATH'
+                  sh 'flyway -user=$FLYWAY_USER -password=$FLYWAY_PASSWORD -url=$FLYWAY_URL  -locations=$FLYWAY_PATH/sql migrate'
               }
     }
-    stage('Validate - DB Migration') {
+    stage('Validate - Changes') {
               steps {
-                  sh '$FLYWAY_PATH/flyway -user=$FLYWAY_USER -password=$FLYWAY_PASSWORD -url=$FLYWAY_URL -locations=$FLYWAY_PATH/sql validate'
+                  sh 'flyway -user=$FLYWAY_USER -password=$FLYWAY_PASSWORD -url=$FLYWAY_URL -locations=$FLYWAY_PATH/sql validate'
               }
     }
-    stage('Info') {
+    stage('Show Info') {
               steps {
-                  sh '$FLYWAY_PATH/flyway -user=$FLYWAY_USER -password=$FLYWAY_PASSWORD -url=$FLYWAY_URL -locations=$FLYWAY_PATH/sql info'
+                  sh 'flyway -user=$FLYWAY_USER -password=$FLYWAY_PASSWORD -url=$FLYWAY_URL -locations=$FLYWAY_PATH/sql info'
               }
     }
   }
