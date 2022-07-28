@@ -1,11 +1,9 @@
 pipeline {
-  agent {
-    docker { image 'liquibase/liquibase:4.14.0' }
-  }
+  agent any 
   stages {
-    stage('Test') {
+    stage('Verify version') {
       steps {
-        sh 'liquibase --version'
+        sh 'docker run --rm flyway/flyway:9.0.1 version'
       }
     }
   }
