@@ -14,7 +14,7 @@ pipeline {
                   FLYWAY_PATH='/usr/local/bin/flyway-9.0.1'
               }
               steps {
-                  sh 'Flyway path'
+                  echo 'Flyway path'
                   echo "$FLYWAY_PATH"
                   echo 'Password-------'
                   echo "$DB_PROTEOMES_PSW"
