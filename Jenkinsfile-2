@@ -13,17 +13,17 @@ pipeline {
     stage('Build - DB Changes') {
               steps {
                   sh 'cd $FLYWAY_PATH'
-                  sh 'flyway -user=$FLYWAY_USER -password=$FLYWAY_PASSWORD -url=$FLYWAY_URL  -locations=$FLYWAY_PATH/sql migrate'
+                  sh 'flyway -user=$FLYWAY_USER -password=$FLYWAY_PASSWORD -url=$FLYWAY_URL  -locations=$FLYWAY_LOCATIONS migrate'
               }
     }
     stage('Validate - Changes') {
               steps {
-                  sh 'flyway -user=$FLYWAY_USER -password=$FLYWAY_PASSWORD -url=$FLYWAY_URL -locations=$FLYWAY_PATH/sql validate'
+                  sh 'flyway -user=$FLYWAY_USER -password=$FLYWAY_PASSWORD -url=$FLYWAY_URL -locations=$FLYWAY_LOCATIONS validate'
               }
     }
     stage('Show Info') {
               steps {
-                  sh 'flyway -user=$FLYWAY_USER -password=$FLYWAY_PASSWORD -url=$FLYWAY_URL -locations=$FLYWAY_PATH/sql info'
+                  sh 'flyway -user=$FLYWAY_USER -password=$FLYWAY_PASSWORD -url=$FLYWAY_URL -locations=$FLYWAY_LOCATIONS info'
               }
     }
   }
