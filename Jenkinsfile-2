@@ -12,7 +12,8 @@ pipeline {
   stages {
     stage('Build - DB Migration') {
               steps {
-                  sh '$FLYWAY_PATH/flyway -user=$FLYWAY_USER -password=$FLYWAY_PASSWORD -url=$FLYWAY_URL migrate'
+                  echo "Este es el work mijo $WORKSPACE'
+                  sh '$FLYWAY_PATH/flyway -user=$FLYWAY_USER -password=$FLYWAY_PASSWORD -url=$FLYWAY_URL  -locations=$FLYWAY_PATH/sql migrate'
               }
     }
     stage('Validate - DB Migration') {
