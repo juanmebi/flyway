@@ -12,12 +12,12 @@ pipeline {
   stages {
     stage('Build - DB Migration') {
               steps {
-                  sh '$FLYWAY_PATH/flyway -user=$FLYWAY_USER -password=$FLYWAY_PASSWORD -url=$FLYWAY_URL -locations=$FLYWAY_PATH/sql migrate'
+                  sh '$FLYWAY_PATH/flyway -user=$FLYWAY_USER -password=$FLYWAY_PASSWORD -url=$FLYWAY_URL migrate'
               }
     }
     stage('Validate - DB Migration') {
               steps {
-                  sh '$FLYWAY_PATH/flyway -user=$FLYWAY_USER -password=$FLYWAY_PASSWORD -url=$FLYWAY_URL validate'
+                  sh '$FLYWAY_PATH/flyway -user=$FLYWAY_USER -password=$FLYWAY_PASSWORD -url=$FLYWAY_URL -locations=$FLYWAY_PATH/sql validate'
               }
     }
     stage('Info') {
