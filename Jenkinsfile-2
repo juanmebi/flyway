@@ -17,12 +17,12 @@ pipeline {
     }
     stage('Validate - Changes') {
               steps {
-                  sh 'flyway -user=$FLYWAY_USER -password=$FLYWAY_PASSWORD -url=$FLYWAY_URL -locations="filesystem:./sql" validate'
+                  sh '$FLYWAY_PATH/flyway -user=$FLYWAY_USER -password=$FLYWAY_PASSWORD -url=$FLYWAY_URL  -locations=$FLYWAY_LOCATIONS validate'
               }
     }
     stage('Show Info') {
               steps {
-                  sh 'flyway -user=$FLYWAY_USER -password=$FLYWAY_PASSWORD -url=$FLYWAY_URL -locations=$FLYWAY_LOCATIONS info'
+                  sh '$FLYWAY_PATH/flyway -user=$FLYWAY_USER -password=$FLYWAY_PASSWORD -url=$FLYWAY_URL  -locations=$FLYWAY_LOCATIONS info'
               }
     }
   }
