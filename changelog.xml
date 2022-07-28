@@ -1,0 +1,224 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="juan (generated)" id="1658997650830-1">
+        <createTable tableName="proteome">
+            <column name="oscode" type="VARCHAR(8)"/>
+            <column name="proteome_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="proteome_pkey"/>
+            </column>
+            <column name="proteome_name1" type="VARCHAR(200)"/>
+            <column name="strain" type="VARCHAR(150)"/>
+            <column name="superregnum_name" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="proteome_taxid" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="order_in" type="BIGINT"/>
+            <column name="user_stamp" type="VARCHAR(60)"/>
+            <column name="time_stamp" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column defaultValueBoolean="true" name="is_complete" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="kw_added_uniprot_release_id" type="VARCHAR(8)"/>
+            <column defaultValueBoolean="false" name="is_reference" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="proteome_map_type" type="SMALLINT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="protein_count" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="lineage" type="VARCHAR(4000)"/>
+            <column defaultValueNumeric="0" name="ignore_cpd" type="BIGINT"/>
+            <column name="file_name" type="VARCHAR(60)"/>
+            <column name="gc_set_acc" type="VARCHAR(20)"/>
+            <column name="upid" type="VARCHAR(20)"/>
+            <column defaultValueBoolean="false" name="publish" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="orf_regexp" type="VARCHAR(360)"/>
+            <column name="swissprot_name" type="VARCHAR(255)"/>
+            <column name="internal" type="VARCHAR(4000)"/>
+            <column name="isolate" type="VARCHAR(225)"/>
+            <column name="assembly_id" type="VARCHAR(100)"/>
+            <column defaultValueNumeric="1" name="process_redundancy" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="is_representative" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="-1" name="is_redundant" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="redundancy_immunity" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="curated_complete" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="source_taxid" type="BIGINT"/>
+            <column defaultValueBoolean="false" name="coverable_by_redundancy" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="full_lineage" type="VARCHAR(4000)"/>
+            <column defaultValueBoolean="true" name="is_new" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="annotation_source_url" type="VARCHAR(255)"/>
+            <column name="assembly_source_url" type="VARCHAR(255)"/>
+            <column defaultValueBoolean="false" name="tax_id_lock" type="BOOLEAN"/>
+            <column name="genus_taxid" type="BIGINT"/>
+            <column name="is_metagenome" type="BOOLEAN"/>
+            <column defaultValueBoolean="true" name="process_busco" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="for_proteomics" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_dna_cached" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column defaultValueBoolean="false" name="is_excluded" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="exclusion_immunity" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="assembly_level" type="VARCHAR(20)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="juan (generated)" id="1658997650830-2">
+        <createTable tableName="flyway_schema_history">
+            <column name="installed_rank" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="flyway_schema_history_pk"/>
+            </column>
+            <column name="version" type="VARCHAR(50)"/>
+            <column name="description" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="script" type="VARCHAR(1000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="checksum" type="INTEGER"/>
+            <column name="installed_by" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="installed_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="execution_time" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="success" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="juan (generated)" id="1658997650830-3">
+        <createTable tableName="proteome_audit">
+            <column name="oscode" type="VARCHAR(8)"/>
+            <column name="proteome_id" type="BIGINT"/>
+            <column name="strain" type="VARCHAR(150)"/>
+            <column name="superregnum_name" type="VARCHAR(20)"/>
+            <column name="proteome_taxid" type="BIGINT"/>
+            <column name="order_in" type="BIGINT"/>
+            <column name="user_stamp" type="VARCHAR(60)"/>
+            <column name="time_stamp" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="is_complete" type="BOOLEAN"/>
+            <column name="kw_added_uniprot_release_id" type="VARCHAR(8)"/>
+            <column name="is_reference" type="BOOLEAN"/>
+            <column name="proteome_map_type" type="SMALLINT"/>
+            <column name="protein_count" type="BIGINT"/>
+            <column name="lineage" type="VARCHAR(4000)"/>
+            <column name="scope" type="BIGINT"/>
+            <column name="ignore_cpd" type="BIGINT"/>
+            <column name="file_name" type="VARCHAR(60)"/>
+            <column name="audit_user" type="VARCHAR(60)"/>
+            <column name="audit_time" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="audit_event" type="VARCHAR(6)"/>
+            <column name="audit_remark" type="VARCHAR(50)"/>
+            <column name="gc_set_acc" type="VARCHAR(20)"/>
+            <column name="upid" type="VARCHAR(20)"/>
+            <column name="internal" type="VARCHAR(4000)"/>
+            <column name="swissprot_name" type="VARCHAR(255)"/>
+            <column name="orf_regexp" type="VARCHAR(360)"/>
+            <column name="publish" type="BOOLEAN"/>
+            <column name="is_representative" type="BOOLEAN"/>
+            <column name="is_redundant" type="BIGINT"/>
+            <column name="redundancy_immunity" type="BOOLEAN"/>
+            <column name="curated_complete" type="BIGINT"/>
+            <column name="ensembl_taxid" type="BIGINT"/>
+            <column name="coverable_by_redundancy" type="BOOLEAN"/>
+            <column name="full_lineage" type="VARCHAR(4000)"/>
+            <column name="is_new" type="BOOLEAN"/>
+            <column name="proteome_name1" type="VARCHAR(200)"/>
+            <column name="isolate" type="VARCHAR(225)"/>
+            <column name="assembly_id" type="VARCHAR(100)"/>
+            <column defaultValueNumeric="1" name="process_redundancy" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="source_taxid" type="BIGINT"/>
+            <column name="annotation_source_url" type="VARCHAR(255)"/>
+            <column name="assembly_source_url" type="VARCHAR(255)"/>
+            <column defaultValueBoolean="false" name="tax_id_lock" type="BOOLEAN"/>
+            <column name="genus_taxid" type="BIGINT"/>
+            <column name="is_metagenome" type="BOOLEAN"/>
+            <column defaultValueBoolean="true" name="process_busco" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="for_proteomics" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_dna_cached" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column defaultValueBoolean="false" name="is_excluded" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="exclusion_immunity" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="assembly_level" type="VARCHAR(20)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="juan (generated)" id="1658997650830-4">
+        <addUniqueConstraint columnNames="gc_set_acc" constraintName="proteome_un" tableName="proteome"/>
+    </changeSet>
+    <changeSet author="juan (generated)" id="1658997650830-5">
+        <addUniqueConstraint columnNames="upid" constraintName="proteome_upid_key" tableName="proteome"/>
+    </changeSet>
+    <changeSet author="juan (generated)" id="1658997650830-6">
+        <createIndex indexName="flyway_schema_history_s_idx" tableName="flyway_schema_history">
+            <column name="success"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="juan (generated)" id="1658997650830-7">
+        <createTable tableName="l_audit_remark">
+            <column name="application_name" type="TEXT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="juan (generated)" id="1658997650830-8">
+        <createTable tableName="temp_track_new_proteomes">
+            <column name="proteome_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="juan (generated)" id="1658997650830-9">
+        <createTable tableName="test1">
+            <column name="proteome_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="proteome_name1" type="VARCHAR(200)"/>
+            <column name="proteome_name2" type="VARCHAR(200)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="juan (generated)" id="1658997650830-10">
+        <createTable tableName="test2">
+            <column name="proteome_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
