@@ -12,9 +12,7 @@ pipeline {
   stages {
     stage('Build - DB Changes') {
               steps {
-                  sh 'export PATH=$PATH:/usr/local/bin/$FLYWAY_PATH'
-                  sh 'cd $FLYWAY_PATH'
-                  sh 'flyway migrate'
+                  sh 'flyway -user=$FLYWAY_USER -password=$FLYWAY_PASSWORD -url=$FLYWAY_URL  -locations=$FLYWAY_LOCATIONS migrate'
               }
     }
     stage('Validate - Changes') {
