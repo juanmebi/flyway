@@ -2,7 +2,7 @@ pipeline {
   agent any 
   environment {
     DB_PROTEOMES=credentials('db-proteomes')
-    FLYWAY_LOCATIONS='/usr/local/bin/flyway-9.0.1/sql'
+    FLYWAY_LOCATIONS='/Volumes/Macintosh\ HD\ 4/DEV/Repos/liquibase/changes'
     FLYWAY_URL='jdbc:postgresql://localhost:5432/postgres'
     FLYWAY_USER='postgres'
     FLYWAY_PASSWORD='test'
