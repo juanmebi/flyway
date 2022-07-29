@@ -7,6 +7,15 @@ pipeline {
     FLYWAY_PATH='/usr/local/bin/flyway-9.0.1'
   }
   stages {
+    stage('build') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/juanmebi/flyway.git'
+                
+                sh 'cd $FLYWAY_LOCATIONS'
+                sh 'git pull origin main'
+            }
+    }
     stage('Build - DB Changes') {
               steps {
                   sh '$FLYWAY_PATH/flyway -user=$DB_PROTEOMES_USR -password=$DB_PROTEOMES_PSW -url=$FLYWAY_URL  -locations=$FLYWAY_LOCATIONS migrate'
