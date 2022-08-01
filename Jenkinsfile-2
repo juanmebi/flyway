@@ -9,22 +9,32 @@ pipeline {
   stages {
     stage('Build - DB Changes') {
               steps {
-                  flywayrunner installationName: 'Flyway', 
-                                                  flywayCommand: 'migrate', 
-                                                  credentialsId: 'db-proteomes',  
-                                                  url: "${FLYWAY_URL}", 
-                                                  locations: "${FLYWAY_LOCATIONS}", 
-                                                  commandLineArgs: ''
+                  flywayrunner  installationName: 'flyway',
+                                flywayCommand: 'migrate',
+                                credentialsId: 'db-proteomes',
+                                url: "${FLYWAY_URL}",
+                                locations: "${FLYWAY_LOCATIONS}",
+                                commandLineArgs: ''
               }
     }
     stage('Validate - Changes') {
               steps {
-                  sh '$FLYWAY_PATH/flyway -user=$DB_PROTEOMES_USR -password=$DB_PROTEOMES_PSW -url=$FLYWAY_URL  -locations=$FLYWAY_LOCATIONS validate'
+                  flywayrunner  installationName: 'flyway',
+                                flywayCommand: 'validate',
+                                credentialsId: 'db-proteomes',
+                                url: "${FLYWAY_URL}",
+                                locations: "${FLYWAY_LOCATIONS}",
+                                commandLineArgs: ''
               }
     }
     stage('Show Info') {
               steps {
-                  sh '$FLYWAY_PATH/flyway -user=$DB_PROTEOMES_USR -password=$DB_PROTEOMES_PSW -url=$FLYWAY_URL  -locations=$FLYWAY_LOCATIONS info'
+                  flywayrunner  installationName: 'flyway',
+                                flywayCommand: 'info',
+                                credentialsId: 'db-proteomes',
+                                url: "${FLYWAY_URL}",
+                                locations: "${FLYWAY_LOCATIONS}",
+                                commandLineArgs: ''
               }
     }
   }
