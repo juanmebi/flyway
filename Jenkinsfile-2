@@ -9,7 +9,7 @@ pipeline {
   stages {
     stage('Build - DB Changes') {
               steps {
-                  flywayrunner installationName: 'flywaytool', flywayCommand: 'migrate', credentialsId: 'bdb-proteomes',  url: $FLYWAY_URL, locations: $FLYWAY_LOCATIONS, commandLineArgs: ''
+                  flywayrunner installationName: 'flywaytool', flywayCommand: 'migrate', credentialsId: 'db-proteomes',  url: $FLYWAY_URL, locations: $FLYWAY_LOCATIONS, commandLineArgs: ''
               }
     }
     stage('Validate - Changes') {
