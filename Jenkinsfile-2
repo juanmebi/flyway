@@ -9,7 +9,11 @@ pipeline {
   stages {
     stage('Build - DB Changes') {
               steps {
-                  sh '$FLYWAY_PATH/flyway -user=$DB_PROTEOMES_USR -password=$DB_PROTEOMES_PSW -url=$FLYWAY_URL  -locations=$FLYWAY_LOCATIONS migrate'
+                  name('flyway')
+                  command('migrate')
+                  url($FLYWAY_URL)
+                  locations($FLYWAY_LOCATIONS)
+                  credentialsId('db-proteomes')
               }
     }
     stage('Validate - Changes') {
