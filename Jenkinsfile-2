@@ -28,7 +28,7 @@ pipeline {
                                 flywayCommand: 'migrate',
                                 credentialsId: 'db-proteomes',
                                 url: "${FLYWAY_URL}",
-                                locations: "${FLYWAY_LOCATIONS}",
+                                locations: "${FLYWAY_LOCATIONS}/${params.ENVIRONMENT}",
                                 commandLineArgs: ''
               }
     }
