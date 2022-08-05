@@ -7,6 +7,21 @@ pipeline {
     FLYWAY_PATH='/usr/local/bin/flyway-9.0.1'
   }
   stages {
+    stage('Setup parameters') {
+            steps {
+                script { 
+                    properties([
+                        parameters([
+                            string(
+                                defaultValue: 'V1.', 
+                                name: 'STRING-PARAMETER', 
+                                trim: true
+                            )
+                        ])
+                    ])
+                }
+            }
+        }
     stage('Build - DB Changes') {
               steps {
                   flywayrunner  installationName: 'flyway',
