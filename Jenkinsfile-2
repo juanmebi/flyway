@@ -2,7 +2,7 @@ pipeline {
   agent any 
   environment {
     DB_PROTEOMES=credentials('db-proteomes')
-    FLYWAY_LOCATIONS="filesystem:$WORKSPACE"
+    FLYWAY_LOCATIONS="filesystem:$WORKSPACE/$params.ENVIRONMENT"
     FLYWAY_URL='jdbc:postgresql://localhost:5432/postgres'
     FLYWAY_PATH='/usr/local/bin/flyway-9.0.1'
   }
